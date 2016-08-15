@@ -283,6 +283,8 @@ class Command(BaseCommand):
 
                     total = len(database_pks)
                 else:
+                    from django.db import connection
+                    connection.close()
                     database_pks = set(smart_bytes(pk) for pk in qs.values_list('pk', flat=True))
 
                 # Since records may still be in the search index but not the local database
